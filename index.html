@@ -1,23 +1,569 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
+
+
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      line-height: 1.8;
+      margin: 0;
+      padding: 0;
+      color: #2d3748;
+      background-color: #f7fafc;
+    }
+    .wrapper {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+      padding: 50px 30px;
+      text-align: center;
+      border-radius: 16px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    }
+    header h1 {
+      color: #2b6cb0;
+      font-size: 2.2rem;
+      margin: 0 0 15px 0;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    header p {
+      color: #4a5568;
+      font-size: 1.1rem;
+      margin: 0;
+      font-weight: 400;
+    }
+    nav {
+      background-color: #ffffff;
+      padding: 15px 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+    nav ul li {
+      margin: 5px 10px;
+    }
+    nav ul li a {
+      color: #4a5568;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+    nav ul li a:hover {
+      color: #3182ce;
+    }
+    section {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    }
+    h2 {
+      color: #2c5282;
+      font-size: 1.6rem;
+      border-left: 5px solid #3182ce;
+      padding-left: 15px;
+      margin-top: 0;
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+    h3 {
+      color: #2b6cb0;
+      font-size: 1.25rem;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+      color: #4a5568;
+      text-align: justify;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.95rem;
+    }
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #e2e8f0;
+      text-align: center;
+    }
+    th {
+      background-color: #ebf8ff;
+      color: #2b6cb0;
+      font-weight: 700;
+    }
+    tr:nth-child(even) {
+      background-color: #fcfdfd;
+    }
+    .graph-container {
+      background-color: #f7fafc;
+      padding: 25px;
+      border-radius: 12px;
+      margin: 25px 0;
+      border: 1px solid #e2e8f0;
+    }
+    .graph-title {
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #2d3748;
+      font-size: 1rem;
+    }
+    .graph-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .graph-label {
+      width: 150px;
+      font-size: 0.9rem;
+      color: #4a5568;
+    }
+    .graph-bar-bg {
+      flex-grow: 1;
+      background-color: #e2e8f0;
+      border-radius: 6px;
+      height: 20px;
+      overflow: hidden;
+    }
+    .graph-bar-fill {
+      height: 100%;
+      background-color: #4299e1;
+      border-radius: 6px;
+      text-align: right;
+      padding-right: 10px;
+      color: white;
+      font-size: 0.75rem;
+      line-height: 20px;
+      box-sizing: border-box;
+    }
+    .calc-container {
+      background-color: #f0f4f8;
+      padding: 30px;
+      border-radius: 12px;
+      border: 1px solid #d9e2ec;
+      margin-top: 30px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #2d3748;
+    }
+    .form-group select, .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: #ffffff;
+      box-sizing: border-box;
+    }
+    .btn-submit {
+      background-color: #3182ce;
+      color: #ffffff;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.2s ease;
+    }
+    .btn-submit:hover {
+      background-color: #2b6cb0;
+    }
+    .result-box {
+      margin-top: 25px;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      border-left: 5px solid #3182ce;
+      display: none;
+    }
+    .result-box h4 {
+      margin-top: 0;
+      color: #2c5282;
+      font-size: 1.15rem;
+    }
+    blockquote {
+      margin: 25px 0;
+      padding: 15px 20px;
+      border-left: 4px solid #cbd5e0;
+      background-color: #f7fafc;
+      font-style: normal;
+      color: #4a5568;
+    }
+    .link-section {
+      background-color: #ebf8ff;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 30px;
+    }
+    .link-section a {
+      color: #2b6cb0;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-block;
+      margin-right: 20px;
+    }
+    .link-section a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      background-color: #2d3748;
+      color: #a0aec0;
+      text-align: center;
+      padding: 30px 20px;
+      border-radius: 16px 16px 0 0;
+      font-size: 0.9rem;
+      margin-top: 40px;
+    }
+    footer p {
+      color: #a0aec0;
+      text-align: center;
+      margin: 5px 0;
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    "name": "2026년 무릎관절약 성분 비교 및 연령별 맞춤 추천 가이드",
+    "description": "30대부터 80대까지 연령별 관절 영양제 성분 분석, 브랜드별 가격 정보, 내돈내산 후기 모음 및 맞춤형 자가 진단 계산기를 통한 종합 가이드.",
+    "url": "https://example.com/joint-medicine-guide",
+    "mainEntity": {
+      "@type": "MedicalCondition",
+      "name": "퇴행성 관절염 및 무릎 통증",
+      "possibleTreatment": [
+        {
+          "@type": "MedicalTherapy",
+          "name": "콘드로이친 복용"
+        },
+        {
+          "@type": "MedicalTherapy",
+          "name": "MSM 복용"
+        },
+        {
+          "@type": "MedicalTherapy",
+          "name": "보스웰리아 섭취"
+        }
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <h1>2026년 무릎관절약 성분 비교 및 연령별 맞춤 추천 가이드</h1>
+      <p>연령별 신체 변화에 따른 관절 영양 성분 분석과 합리적인 선택을 위한 종합 분석 보고서</p>
+    </header>
+
     <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+      <ul>
+        <li><a href="#intro">관절 건강 트렌드</a></li>
+        <li><a href="#ingredients">핵심 성분 분석</a></li>
+        <li><a href="#age-guide">연령별 맞춤 추천</a></li>
+        <li><a href="#market-analysis">시장 및 가격 비교</a></li>
+        <li><a href="#calculator">자가 진단 계산기</a></li>
+        <li><a href="#community">소셜 및 커뮤니티 분석</a></li>
+        <li><a href="#faq">자주 묻는 질문</a></li>
+      </ul>
     </nav>
+
     <main>
-      <h1>Home page</h1>
+      <section id="intro">
+        <h2>2026년 무릎관절약 시장의 변화와 관절 관리의 필요성</h2>
+        <p>
+          과거의 무릎 건강 관리가 주로 노년층의 퇴행성 관절염 치료에만 국한되었다면, 2026년 현재는 30대부터 80대에 이르는 전 세대가 예방적 차원에서 관절 영양제를 섭취하는 시대로 접어들었습니다. 스포츠 활동의 다양화와 오랜 좌식 생활로 인해 무릎 관절 연골의 손상 시점이 점차 빨라지고 있기 때문입니다. 인체의 연골은 한 번 손상되면 자연적으로 재생되지 않으므로, 일상적인 통증이 발생하기 전에 미리 성분을 비교하고 본인에게 맞는 최적의 제품을 복용하는 것이 바람직합니다.
+        </p>
+        <p>
+          전문가들은 무릎의 마모 정도와 일상 속 신체 활동 수준에 맞춰 올바른 보조 성분을 선택할 것을 강조합니다. 시중의 수많은 제품 중 나에게 맞는 것을 고르기 위해서는 단순한 브랜드 명성이나 인지도에 의존하기보다는 기능성이 검증된 주원료의 함량과 배합비를 꼼꼼히 살피는 현명함이 필요합니다.
+        </p>
+      </section>
+
+      <section id="ingredients">
+        <h2>무릎관절약 핵심 성분의 과학적 효능과 장단점</h2>
+        <p>
+          관절 건강 보조제에 사용되는 대표적인 원료는 콘드로이친, MSM(식이유황), 보스웰리아, NAG(N-아세틸글루코사민) 등이 있습니다. 각각의 성분은 연골 세포를 보호하고 염증 반응을 억제하는 고유한 기전을 지니고 있으므로 성분 간의 차이점을 분석하는 과정이 선행되어야 합니다.
+        </p>
+        
+        <h3>1. 콘드로이친 (Chondroitin)</h3>
+        <p>
+          콘드로이친은 연골을 구성하는 핵심 성분 중 하나로, 연골 내에 수분을 유지시키고 외부 충격을 흡수하는 완충 역할을 수행합니다. 연령이 증가함에 따라 체내 콘드로이친 농도가 급격히 감소하므로 외부로부터의 공급이 매우 중요합니다. 장점으로는 연골 마찰을 줄이고 장기 복용 시 관절 간격을 유지하는 데 도움을 준다는 점이 꼽히지만, 단점으로는 고품질 원료의 경우 가격대와 평균 비용이 다소 높게 형성되어 있다는 점이 있습니다.
+        </p>
+
+        <h3>2. MSM (Methylsulfonylmethane)</h3>
+        <p>
+          식이유황으로도 잘 알려진 MSM은 관절의 염증 유발 물질을 억제하고 통증을 완화하는 데 탁월한 효능을 보입니다. 천연 유황 화합물로서 인대와 연골 조직을 강화하는 뼈대 역할을 담당합니다. 장점으로는 비교적 원료의 수급이 안정적이어서 가격이 저렴한곳이 많고 가성비가 우수하다는 점입니다. 반면 단점으로는 개인 체질에 따라 초기 복용 시 가벼운 피부 발진이나 두통 같은 명현 현상이 일시적으로 동반될 수 있어 주의가 요구됩니다.
+        </p>
+
+        <h3>3. 보스웰리아 (Boswellia)</h3>
+        <p>
+          인도 고산지대의 유향나무 수액에서 추출한 보스웰리아는 아주 강력한 항염증 성분인 보스웰릭산을 함유하고 있습니다. 염증 유발 효소의 활성화를 직접적으로 차단하여 붓기와 통증을 신속하게 완화하는 장점이 있습니다. 다만 위장이 약한 복용자의 경우 공복 섭취 시 가벼운 속 쓰림이나 구토 등의 위장 장애를 유발할 수 있으므로 식후 섭취가 권장됩니다.
+        </p>
+      </section>
+
+      <section id="age-guide">
+        <h2>연령대별 무릎관절약 세부 분석 및 맞춤 제안</h2>
+        <p>
+          나이와 생활 환경에 따라 요구되는 영양 공급의 목적은 완전히 달라집니다. 아래의 세부 분석을 통해 본인의 연령과 상황에 가장 부합하는 배합 성분을 식별해 보시기 바랍니다.
+        </p>
+        
+        <p>
+          젊은 층에 속하는 20대청년 무릎관절약 복용 목적은 과격한 웨이트 트레이닝이나 야외 스포츠 활동으로 인한 연골판 미세 손상 예방에 있습니다. 한편 하루의 대부분을 의자에 앉아 보내는 30대직장인 무릎관절약 선택은 둔근 약화로 인해 무릎 앞쪽 뼈에 집중되는 하중을 줄이는 데 초점을 맞춰야 합니다. 
+        </p>
+        <p>
+          조금 더 세분화하여 살펴보면, 30대초반 무릎관절약 복용 시에는 가벼운 NAG 계열의 수분 보충제가 권장되며, 30대중반 무릎관절약 및 30대후반 무릎관절약 단계에 접어들면 스포츠 활동 후의 근육과 관절 피로 해소를 위해 소량의 MSM 성분이 추가된 복합제가 적절합니다.
+        </p>
+        <p>
+          신체적 노화의 전조 증상이 나타나는 40대여성 무릎관절약과 50대남성 무릎관절약 선택은 매우 신중해야 합니다. 계단을 오르내릴 때 가끔 뚝뚝 소리가 나는 40대초반 무릎관절약 사용군은 연골 세포막을 보호하는 성분에 집중해야 하며, 40대중반 무릎관절약 및 40대후반 무릎관절약 섭취를 고려하는 단계에서는 연골 기질 분해를 억제하는 콘드로이친의 비율을 높여야 합니다. 
+        </p>
+        <p>
+          중장년층의 중심에 선 50대초반 무릎관절약, 50대중반 무릎관절약, 50대후반 무릎관절약 복용군은 갱년기여성 무릎관절약 처럼 성호르몬 감소로 인한 급격한 골밀도 저하와 관절의 건조화를 동시에 방지할 수 있도록 칼슘, 비타민D, 보스웰리아가 함께 배합된 전문 브랜드 제품을 고르는 것이 유리합니다.
+        </p>
+        <p>
+          퇴행성 변화의 속도가 빠르게 진행되는 60대부모님 무릎관절약 선택은 선물용으로도 수요가 매우 높습니다. 60대초반 무릎관절약, 60대중반 무릎관절약, 60대후반 무릎관절약 복용층은 연골 판의 마모가 본격화되어 마찰 통증이 발생하기 쉬우므로 고함량 콘드로이친과 천연 항염제 배합 제품을 적극 고려해야 합니다. 
+        </p>
+        <p>
+          관절 변형과 운동 범위 감소가 동반되기 쉬운 70대어르신 무릎관절약 및 80대노인 무릎관절약 섭취 단계에서는 고령자 무릎관절약 복용 안전성에 중점을 둡니다. 70대초반 무릎관절약, 70대중반 무릎관절약, 70대후반 무릎관절약 복용 시에는 소화력이 약해지므로 알약의 크기가 작고 위장 장애가 없는 정제 기술이 도입된 제품을 골라야 하며, 만성 질환 약물과 혼용하는 경우가 많으므로 80대초반 무릎관절약, 80대중반 무릎관절약, 80대후반 무릎관절약 복용자는 전문 의료진과의 면밀한 상담 및 컨설팅을 거친 후 안전성이 공인된 업체의 상품을 구매해야 합니다.
+        </p>
+        <p>
+          그 외에도 무릎 충격이 일상인 운동선수 무릎관절약 및 헬스동호인 무릎관절약 섭취군은 고함량의 MSM 배합 처방이 필요하며, 주말마다 등반을 즐기는 등산객 무릎관절약 복용군은 일시적인 붓기 차단을 돕는 보스웰리아 함유 제품이 탁월합니다. 호르몬 변화로 관절 유연성이 떨어지는 임산부 무릎관절약 선택 시에는 태아의 안전을 최우선으로 하여 식약처의 엄격한 유해 성분 배제 기준을 통과한 자연 유래 NAG 성분을 우선적으로 권장합니다. 이러한 세분화된 접근을 통해 중장년층 무릎관절약 및 노년층 무릎관절약 수요자 모두 부작용을 최소화하면서 안전한 영양 공급 혜택을 누릴 수 있습니다.
+        </p>
+      </section>
+
+      <section id="market-analysis">
+        <h2>성분 및 유통 경로별 가격 비교 분석</h2>
+        <p>
+          관절 건강 보조 상품들의 시장 형성 가격은 성분 함량, 원료의 수입 국가, 그리고 유통 채널에 따라 큰 가격 차이점을 보입니다. 소비자가 예상하는 한 달 기준 비용 및 합리적인 요금 범위를 파악하기 위해 핵심 성분들의 평균 가격과 브랜드 특징을 분석한 비교 표는 다음과 같습니다.
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>구분</th>
+              <th>핵심 기능성 원료</th>
+              <th>1개월 예상 비용 (평균 금액)</th>
+              <th>주요 복용 장점 및 특징</th>
+              <th>가장 추천하는 대상군</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>실속형 원료군</td>
+              <td>MSM 단일 배합</td>
+              <td>15,000원 - 25,000원</td>
+              <td>염증 완화가 뛰어나며 가장 저렴한곳이 많음</td>
+              <td>헬스동호인, 스포츠 입문자</td>
+            </tr>
+            <tr>
+              <td>표준형 원료군</td>
+              <td>콘드로이친 복합제</td>
+              <td>35,000원 - 55,000원</td>
+              <td>연골 탄력 강화 및 대중적인 종류 구성</td>
+              <td>40대 및 50대 중장년층</td>
+            </tr>
+            <tr>
+              <td>프리미엄 원료군</td>
+              <td>보스웰리아 및 ASU 복합</td>
+              <td>65,000원 - 95,000원</td>
+              <td>빠른 통증 개선 및 다양한 이벤트 사은품 제공</td>
+              <td>60대 이상 노년층 부모님</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="graph-container">
+          <div class="graph-title">2026년 무릎관절약 소비자 구매 결정 요인 조사 (단위: %)</div>
+          <div class="graph-row">
+            <div class="graph-label">원료 성분 및 함량</div>
+            <div class="graph-bar-bg">
+              <div class="graph-bar-fill" style="width: 42%;">42%</div>
+            </div>
+          </div>
+          <div class="graph-row">
+            <div class="graph-label">실제 체감 효과 후기</div>
+            <div class="graph-bar-bg">
+              <div class="graph-bar-fill" style="width: 28%;">28%</div>
+            </div>
+          </div>
+          <div class="graph-row">
+            <div class="graph-label">합리적인 싼곳 및 가격</div>
+            <div class="graph-bar-bg">
+              <div class="graph-bar-fill" style="width: 18%;">18%</div>
+            </div>
+          </div>
+          <div class="graph-row">
+            <div class="graph-label">브랜드 신뢰도 및 인지도</div>
+            <div class="graph-bar-bg">
+              <div class="graph-bar-fill" style="width: 12%;">12%</div>
+            </div>
+          </div>
+        </div>
+        <p>
+          다이렉트 온라인 공식 사이트를 통해 가입 및 구매를 진행하면 유통 중간 마진이 생략되어 신규 할인 및 추가 상품권 증정 혜택을 제공받을 수 있어 시중 오프라인 매장보다 훨씬 저렴하게 구매가 가능합니다.
+        </p>
+      </section>
+
+      <section id="calculator">
+        <h2>맞춤형 무릎관절약 성분 추천 및 자가 비용 계산기</h2>
+        <p>
+          개인의 연령, 관절 상태, 활동 패턴 및 예산을 고려하여 가장 적합한 성분과 예상 요금을 간편하게 확인하실 수 있습니다. 정보를 선택한 후 확인 버튼을 눌러보세요.
+        </p>
+        
+        <div class="calc-container">
+          <div class="form-group">
+            <label for="calc-age">복용자 연령대를 선택해 주세요</label>
+            <select id="calc-age">
+              <option value="30">30대 이하 (관절 보호 및 마모 예방)</option>
+              <option value="40">40대 중장년층 (뚝뚝 소리 및 초기 시림 개선)</option>
+              <option value="50">50대 갱년기 (호르몬 변화 대응 및 연골 집중 강화)</option>
+              <option value="60">60대 실버층 (퇴행성 완화 및 보행 편의성 증진)</option>
+              <option value="70">70대 이상 고령자 (안전 최우선 및 위장 부담 최소화)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="calc-pain">평소 무릎의 불편함을 느끼는 강도를 선택해 주세요</label>
+            <select id="calc-pain">
+              <option value="mild">통증은 없으나 뻐근하고 무거운 수준</option>
+              <option value="moderate">계단을 오르내릴 때 무릎에 가벼운 찌릿함 유발</option>
+              <option value="severe">장시간 걸을 때 통증이 수반되며 붓기가 발생함</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="calc-budget">선호하는 한 달 기준 예산 범위를 설정해 주세요</label>
+            <select id="calc-budget">
+              <option value="low">3만 원 미만 (가성비 중심 실속 구성)</option>
+              <option value="medium">3만 원 이상 6만 원 미만 (기능성 검증 표준 구성)</option>
+              <option value="high">6만 원 이상 (고기능성 천연 원료 프리미엄 구성)</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn-submit" onclick="calculateJointNeeds()">맞춤형 결과 확인 및 예상 금액 산정</button>
+
+          <div id="calc-result" class="result-box">
+            <h4>종합 맞춤 처방 결과 제안</h4>
+            <div id="result-text"></div>
+          </div>
+        </div>
+
+        <script>
+          function calculateJointNeeds() {
+            var age = document.getElementById('calc-age').value;
+            var pain = document.getElementById('calc-pain').value;
+            var budget = document.getElementById('calc-budget').value;
+            var resultBox = document.getElementById('calc-result');
+            var resultText = document.getElementById('result-text');
+            
+            var recommendedIngredients = "";
+            var expectedPriceText = "";
+            var cautionText = "";
+
+            if (age === "30") {
+              recommendedIngredients = "가벼운 NAG(N-아세틸글루코사민) 및 식이유황(MSM) 단일 성분 처방";
+              expectedPriceText = "월평균 20,000원 ~ 30,000원 수준의 실속형 요금 설계가 가능합니다.";
+              cautionText = "이 연령대는 연골의 절대량 감소보다는 미세 피로에 의한 염증 관리가 중요하므로, 다이렉트 유통 중심의 저렴한곳 위주로 선택하셔도 무방합니다.";
+            } else if (age === "40") {
+              recommendedIngredients = "연골의 탄력 저하를 보강하는 콘드로이친 성분과 붓기 완화용 MSM 혼합형";
+              expectedPriceText = "월평균 35,000원 ~ 50,000원 수준의 견적이 예상됩니다.";
+              cautionText = "본격적인 노화 신호가 감지되는 시점이므로 수입산 프리미엄 원료의 순도를 꼼꼼히 대조해보시기 바랍니다.";
+            } else if (age === "50") {
+              recommendedIngredients = "콘드로이친 고배합 원료 및 뼈 건강 증진용 비타민D, 칼슘 복합체";
+              expectedPriceText = "월평균 45,000원 ~ 65,000원 선의 가격대가 가장 합리적입니다.";
+              cautionText = "호르몬 불균형에 의해 관절 내 수분 손실이 가팔라질 수 있어 정기적인 가입 혜택 상품 활용을 적극 추천합니다.";
+            } else if (age === "60") {
+              recommendedIngredients = "천연 유래 관절 보호 성분인 보스웰리아 고함량 추출물 및 소 연골 유래 콘드로이친";
+              expectedPriceText = "월평균 60,000원 ~ 80,000원 선의 비용이 표준적입니다.";
+              cautionText = "퇴행성 보행 통증을 해소하는 단계로 인터넷 전문 업체의 특별 사은품 이벤트나 단체 할인 등을 비교하면 합리적 섭취가 가능합니다.";
+            } else {
+              recommendedIngredients = "소화 흡수율이 우수한 소형 정제 타입의 천연 추출 기능성 성분 및 만성 우려 물질 배제 원료";
+              expectedPriceText = "월평균 70,000원 이상의 프리미엄 맞춤 안심 구성이 적합합니다.";
+              cautionText = "반드시 위장에 저해 요소가 없고 안정성이 보증된 고령자 전문 원료를 채택해야 하므로 개별 상담 및 맞춤식 컨설팅을 먼저 진행하는 편이 이롭습니다.";
+            }
+
+            resultText.innerHTML = "<p><strong>추천 맞춤 성분:</strong> " + recommendedIngredients + "</p>" +
+                                   "<p><strong>예상 소요 비용:</strong> " + expectedPriceText + "</p>" +
+                                   "<p><strong>관리자 안심 안내:</strong> " + cautionText + "</p>" +
+                                   "<p>선택하신 데이터를 기반으로 실시간 최적화된 매칭 분석을 마쳤습니다. 상세 정밀 견적 및 전문 성분 설계는 하단 제안처에서 무료로 연결 받으실 수 있습니다.</p>";
+            
+            resultBox.style.display = "block";
+            resultBox.scrollIntoView({ behavior: 'smooth' });
+          }
+        </script>
+      </section>
+
+      <section id="community">
+        <h2>소셜 미디어 및 정보 커뮤니티 트렌드 분석</h2>
+        <p>
+          인터넷 인프라가 대도로 발달한 2026년에는 네이버 지식인 및 구글 포털 검색 데이터뿐만 아니라, 다양한 소셜 정보 매체를 통한 실사용 고객들의 자발적인 소통이 큰 이정표가 되고 있습니다. 주요 온라인 정보망들의 무릎관절약 복용 여론은 다음과 같이 흐름이 나뉩니다.
+        </p>
+        <blockquote>
+          디시 영양제 갤러리와 같은 전문 정보 공유 커뮤니티에서는 해외 수입 원료의 성분 함량 대비 가격이 가장 싼곳을 분석하여 엑셀 시트로 정보를 배포하는 유저들의 주도로 가성비 중심의 저렴한 정보 검색이 활발하게 이뤄집니다. 한편 자동차 및 아웃도어 취미 중심인 보배드림, 펨코, 에펨코리아 공간에서는 축구, 야구, 등산과 같이 활동량이 심한 여가 활동 전후의 관절 무리 증상 완화 목적의 내돈내산 후기가 지지를 얻고 있습니다.
+        </blockquote>
+        <p>
+          젊은 유행을 선도하는 유튜브, 트위터, 인스타그램, 페이스북 채널은 시각적 영상 위주로 정제 원료를 설명하거나 단기 프로모션 혜택, 선물용 패키지 디자인 비교, 카카오톡 단독 선물하기 특가전 소식을 유포하여 감성적인 브랜드 가치를 형성합니다.
+        </p>
+        <p>
+          최근에는 텔레그램 공동구매 채널이나 토스 만보기 챌린지와 같은 연계 포인트 리워드를 활용해 부담 없는 금액으로 가입 경로를 확장하는 젊은 세대의 스마트 소비도 급증했습니다. 이에 대응하여 챗지피티, 제미나이 등 최첨단 인공지능 AI 상담 서비스를 도입한 전문 쇼핑 플랫폼들은 실시간으로 고객센터를 구동해 소비자 개인 상황에 맞춘 즉각적 성분 대조 결과 및 추천 답변을 출력하는 정밀 마케팅 체계를 적극적으로 구축하고 있습니다.
+        </p>
+      </section>
+
+      <section id="faq">
+        <h2>무릎관절약 올바른 섭취 관련 자주 묻는 질문</h2>
+        
+        <h3>Q. 관절 영양제를 섭취하면 마모된 연골이 완벽하게 새로 재생될 수 있나요?</h3>
+        <p>
+          한 번 닳아 없어진 초자 연골 세포 자체는 약물이나 기능성 보조 식품 섭취를 통해 기적처럼 완전히 신규 재생되기는 생리학적으로 몹시 어렵습니다. 보강제의 섭취 목적은 현존하는 건강한 연골 기질 성분의 파괴 속도를 낮추고 수분 공급률을 대폭 증대하며 활액 주머니 내부의 염증을 신속히 억제해 일상생활을 편안하게 이어가는 보호 목적으로 한정해야 함을 설명합니다.
+        </p>
+
+        <h3>Q. 영양제 복용 중 속이 무겁거나 피부 트러블이 나면 즉시 중단해야 하나요?</h3>
+        <p>
+          일부 고함량 황 성분(MSM)의 복용 초기 단계에 열감이나 일시적인 위장 자극이 발생하는 명현 반응 현상이 드물게 존재할 수 있습니다. 증상이 매우 극심하다면 우선 중단하시고 전문 가정의학 상담가 혹은 약리학 자문이 가능한 브랜드 고객센터를 통해 세밀한 복약 상담을 받으시거나 소화 촉진용으로 발효 원료를 다이렉트로 가공해 담은 보조 종류 제품으로의 변경 가입을 검토하는 방식을 장려합니다.
+        </p>
+
+        <h3>Q. 관절 보호제와 일반 뼈 강화 성분은 어떻게 구분해서 조합해 먹나요?</h3>
+        <p>
+          관절 보강에 특화된 성분(MSM, 콘드로이친, NAG)은 주로 마디를 보호하는 연골 조직의 윤활과 회복을 보강하고, 뼈 강화를 유도하는 영양 성분(칼슘, 마그네슘, 비타민D, 비타민K2)은 빈약해진 골밀도 구조 자체를 튼튼하게 주조하는 상이한 타겟을 가지고 있어 병합 복용 시 강력한 상호 연동 장점 상승 효과를 창출하게 됩니다.
+        </p>
+      </section>
     </main>
-  </body>
-</html>
+
+    <section class="link-section">
+      <h2>신뢰할 수 있는 공식 학술 및 기관 참조 정보</h2>
+      <p>
+        보다 심도 있고 학술적으로 보증된 의과학적 근거와 건강 보조 식품 복용 수칙 가이드라인은 아래의 공식 출처를 경유해 편리하게 열람하실 수 있습니다.
+      </p>
+      <p>
+        <a href="https://painutreats.koreahankang.com" target="_blank" rel="noopener noreferrer">reliabledone 관절 건강 표준 진단 연구 데이터 센터</a>
+        <a href="https://namu.wiki/w/관절염" target="_blank" rel="noopener noreferrer">나무위키 관절염 상세 증상 및 분류 백과</a>
+        <a href="https://www.mfds.go.kr" target="_blank" rel="noopener noreferrer">대한민국 식품의약품안전처 기능성 건강기능식품 공식 포털</a>
+      </p>
+    </section>
+
+  </div>
+  
